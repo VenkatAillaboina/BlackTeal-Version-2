@@ -1,0 +1,104 @@
+/* Fonts are linked from index.html, not @imported here: a CSS @import would queue the
+   font request behind this stylesheet instead of alongside it. Two families, two jobs
+   — Inter carries language, IBM Plex Mono carries data. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    /* Tells the UA to render form controls, scrollbars and the caret dark. Without
+       this, native widgets arrive light and break the palette. */
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-ink-void font-sans text-ink-100 antialiased;
+    /* cv11 gives Inter a single-storey 'a' and straight-tailed 'l' — the digits and
+       letters stop colliding in dense telemetry rows. */
+    font-feature-settings: 'cv11' 1, 'ss01' 1;
+  }
+
+  /* Ticking numbers must not change width between frames, or every card jitters at
+     1 Hz. Applied to the mono family itself rather than asked for per component. */
+  .font-mono,
+  code,
+  kbd,
+  samp {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'zero' 1;
+  }
+
+  /* Rule 16: every interactive element shows where focus is, and it is visible against
+     both the void background and a raised panel. Set globally so a component cannot
+     forget it. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-teal-live ring-offset-2 ring-offset-ink-void;
+  }
+
+  ::selection {
+    @apply bg-teal-core/30 text-ink-50;
+  }
+
+  /* Headings inherit the body family; only tracking and weight distinguish them, which
+     is set by the fontSize tokens rather than here. */
+  h1,
+  h2,
+  h3 {
+    @apply text-ink-50;
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  /* An all-caps micro-label above a metric or section. It appears often enough that
+     repeating six utilities at every call site would be worse than one class. */
+  .eyebrow {
+    @apply font-mono text-eyebrow font-medium uppercase text-ink-400;
+  }
+}
+
+/* Custom scrollbar — one of the few places Rule 9 permits raw CSS, since Tailwind has
+   no utility for it. Kept subtle: the operator console is dense enough already. */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.ink.600') transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: theme('colors.ink.600');
+    border: 3px solid transparent;
+    background-clip: content-box;
+    border-radius: 9999px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: theme('colors.ink.500');
+  }
+}
+
+/* Safety net only. Motion collapses to its end state, so nothing is left mid-fade.
+   The cinematic layer does not rely on this — it branches on the same media query in
+   JS (Step 7) and plays real fades instead of nothing. This block exists so a
+   component that forgets to check still cannot spin, slide or pulse. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,32 +1,37 @@
-# React + TypeScript + Vite
+# BlackTeal (Version 2)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+BlackTeal is a modern, high-performance Operator Console and Telemetry Dashboard designed for Battery Energy Storage Systems (BESS). 
 
-Currently, two official plugins are available:
+This project simulates a real-time site topology and renders live telemetry feeds, equipment statuses, and alarm systems in a clean, highly responsive user interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
+- **Live Telemetry Dashboard**: Real-time simulation of power skids, batteries, and substations.
+- **Site Topology Map**: An interactive SVG-based single-line diagram of the site's electrical flow.
+- **Dynamic Alarms Table**: Grouped and ranked fault detection based on severity.
+- **Scenario Controls**: Inject faults or drop connections to test system resilience and UI responsiveness.
 
-## React Compiler
+## 🛠️ Tech Stack
+- **Framework**: React 19 + TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS + custom glassmorphism components
+- **Animations**: GSAP
+- **Code Quality**: Oxlint + Strict TypeScript
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📦 Getting Started
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+### 1. Install Dependencies
+```bash
+npm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### 2. Run the Development Server
+```bash
+npm run dev
+```
+Open your browser to `http://localhost:5173` to view the console.
+
+### 3. Build for Production
+```bash
+npm run build
+```
+This will run strict type checks, linting, and output a highly optimized production bundle to the `/dist` folder.

@@ -43,10 +43,3 @@ Version 2 was built to solve the problems of Version 1. I wanted to keep the eas
 - **Pros:** It is extremely fast. The page loads instantly, uses very little battery power on phones, and never lags even when live data is updating every second.
 - **Cons:** It doesn't have the flashy 3D graphics, but it looks much more like a professional software tool.
 
----
-
-## Conclusion: Why V2 is Better
-
-Version 1 proved we could make something beautiful, but **Version 2** is the final, perfect solution. 
-
-By switching from 3D models to simple animated lines, the website still teaches the user how the site works, but it does it without slowing down their computer. It is fast, safe, and ready to be used by real operators in the real world.
